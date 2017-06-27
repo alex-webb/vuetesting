@@ -36,6 +36,11 @@
   .anotherClass{
     background-color: black;
   }
+  .progBar{
+    width: 300px;
+    height: 20px;
+    background-color: green;
+  }
 </style>
 <div id="exercise">
   <!-- 1) Start the Effect with the Button. The Effect should alternate the "highlight" or "shrink" class on each new setInterval tick (attach respective class to the div with id "effect" below) -->
@@ -58,13 +63,13 @@
   </div>
   <!-- 5) Repeat 3) but now with values for styles (instead of class names). Attach the respective styles.  -->
   <div>
-    <input type="text">
-    <div class="box"></div>
+    <input type="text" v-model="color"><span> (type background color)</span>
+    <div class="box" :style="myStyle"></div>
   </div>
   <!-- 6) Create a simple progress bar with setInterval and style bindings. Start it by hitting the below button. -->
   <div>
-      <!--<button v-on:click="startProgress">Start Progress</button>-->
-    <div></div>
+      <button v-on:click="startProgress">Start Progress</button>
+    <div class="progBar" :style="{width: myWidth}"></div>
   </div>
 </div>
 <script>
@@ -76,20 +81,44 @@ new Vue({
     applyForeColor: true,
     dynamicClass: '',
     dynamicClass2: '',
-    showClass: false
+    showClass: false,
+    color: 'grey',
+    myWidth: 0
   },
   methods: {
     startEffect: function() {
       var vm = this;
-      setInterval(function(){
+      setInterval(function() {
         vm.applyShrink = !vm.applyShrink;
       }, 500);
+    },
+    startProgress: function() {
+      var vm = this;
+      vm.myWidth = 0;
+      var interval = setInterval(function() {
+        if (vm.myWidth >= 200){
+          clearInterval(interval);
+          return;
+        }
+        vm.myWidth = vm.myWidth + 10;
+      }, 100);
     }
   },
   computed: {
     showTheClass: function() {
       return this.showClass == 'true' ? true : false;
+    },
+    myStyle: function() {
+      return {
+        backgroundColor: this.color
+      };
+    },
+    progBarStyle: function() {
+      return {
+        width: myWidth
+      };
     }
+
   }
 });
 </script>
