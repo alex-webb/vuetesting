@@ -22,6 +22,20 @@
   .foreColor{
     color: white;
   }
+
+.box{
+  width: 50px;
+  height: 50px;
+}
+  .test1{
+    background-color: orange;
+  }
+  .test2{
+    background-color: yellow;
+  }
+  .anotherClass{
+    background-color: black;
+  }
 </style>
 <div id="exercise">
   <!-- 1) Start the Effect with the Button. The Effect should alternate the "highlight" or "shrink" class on each new setInterval tick (attach respective class to the div with id "effect" below) -->
@@ -30,22 +44,22 @@
     <div id="effect" class="highlight" :class="{shrink: applyShrink}"></div>
   </div>
   <!-- 2) Create a couple of CSS classes and attach them via the array syntax -->
-  <div :class="[{bgcolor: applyBgColor}, {foreColor: applyForeColor}]">I got no class :(</div>
+  <div :class="[{bgcolor: applyBgColor}, {foreColor: applyForeColor}]">I have 2 classes :D</div>
   <!-- 3) Let the user enter a class (create some example classes) and attach it -->
   <div>
-    <input type="text">
-    <div></div>
+    <input type="text" v-model="dynamicClass"><span> (test1 or test2)</span>
+    <div class="box" :class="dynamicClass"></div>
   </div>
   <!-- 4) Let the user enter a class and enter true/ false for another class (create some example classes) and attach the classes -->
   <div>
-    <input type="text">
-    <input type="text">
-    <div></div>
+    <input type="text" v-model="dynamicClass2"> <span> (test1 or test2)</span>
+    <input type="text" v-model="showClass"> <span> (true or false)</span>
+    <div class="box" :class="[dynamicClass2, {anotherClass: showTheClass}]">{{showClass}}</div>
   </div>
   <!-- 5) Repeat 3) but now with values for styles (instead of class names). Attach the respective styles.  -->
   <div>
     <input type="text">
-    <div></div>
+    <div class="box"></div>
   </div>
   <!-- 6) Create a simple progress bar with setInterval and style bindings. Start it by hitting the below button. -->
   <div>
@@ -59,7 +73,10 @@ new Vue({
   data: {
     applyShrink: false,
     applyBgColor: true,
-    applyForeColor: true
+    applyForeColor: true,
+    dynamicClass: '',
+    dynamicClass2: '',
+    showClass: false
   },
   methods: {
     startEffect: function() {
@@ -67,6 +84,11 @@ new Vue({
       setInterval(function(){
         vm.applyShrink = !vm.applyShrink;
       }, 500);
+    }
+  },
+  computed: {
+    showTheClass: function() {
+      return this.showClass == 'true' ? true : false;
     }
   }
 });
