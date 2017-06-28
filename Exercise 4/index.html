@@ -1,46 +1,7 @@
 <script src="https://npmcdn.com/vue/dist/vue.js"></script>
 <style>
-  #effect {
-    width: 100px;
-    height: 100px;
-    border: 1px solid black;
-  }
-
-  .highlight {
-    background-color: red;
-    width: 200px !important;
-  }
-
-  .shrink {
-    background-color: gray;
-    width: 50px !important;
-  }
-
-  .bgcolor{
-    background-color: blue;
-  }
-  .foreColor{
-    color: white;
-  }
-
-.box{
-  width: 50px;
-  height: 50px;
-}
-  .test1{
-    background-color: orange;
-  }
-  .test2{
-    background-color: yellow;
-  }
-  .anotherClass{
-    background-color: black;
-  }
-  .progBar{
-    width: 300px;
-    height: 20px;
-    background-color: green;
-  }
+  #effect {width: 100px;height: 100px;border: 1px solid black; } .highlight { background-color: red; width: 200px !important; } .shrink { background-color: gray; width: 50px !important; } .bgcolor{ background-color: blue; } .foreColor{ color: white; } .box{
+width: 50px; height: 50px; } .test1{ background-color: orange; } .test2{ background-color: yellow; } .anotherClass{ background-color: black; } .progBar{ width: 300px; height: 20px; background-color: green; }
 </style>
 <div id="exercise">
   <!-- 1) Start the Effect with the Button. The Effect should alternate the "highlight" or "shrink" class on each new setInterval tick (attach respective class to the div with id "effect" below) -->
@@ -69,7 +30,7 @@
   <!-- 6) Create a simple progress bar with setInterval and style bindings. Start it by hitting the below button. -->
   <div>
       <button v-on:click="startProgress">Start Progress</button>
-    <div class="progBar" :style="{width: myWidth}"></div>
+    <div class="progBar" :style="{width: myWidth}">{{myWidth / 2}}%</div>
   </div>
 </div>
 <script>
@@ -118,7 +79,6 @@ new Vue({
         width: myWidth
       };
     }
-
   }
 });
 </script>
